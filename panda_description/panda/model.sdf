@@ -1,4 +1,4 @@
-<sdf version='1.9'>
+<sdf version='1.11'>
   <model name='panda'>
     <joint name='panda_joint_base' type='fixed'>
       <pose relative_to='__model__'>0 0 0 0 0 0</pose>
@@ -726,9 +726,26 @@
         </geometry>
       </visual>
     </link>
-    <static>false</static>
-    <plugin name='ign_ros2_control::IgnitionROS2ControlPlugin' filename='ign_ros2_control-system'>
-      <parameters>/home/andrej/ws/code/repos/panda_ign_moveit2/install/share/panda_moveit_config/config/controllers_effort.yaml</parameters>
+    <plugin name='gz_ros2_control::GazeboSimROS2ControlPlugin' filename='libgz_ros2_control-system'>
+      <parameters>/home/kb/OSRF_Contribution/install/share/panda_moveit_config/config/controllers_effort.yaml</parameters>
     </plugin>
+    <frame name='panda_hand_tcp_virtual_joint' attached_to='panda_hand'>
+      <pose>0 0 0.10340000000000001 0 0 0</pose>
+    </frame>
+    <frame name='panda_hand_tcp' attached_to='panda_hand_tcp_virtual_joint'>
+      <pose>0 0 0 0 0 0</pose>
+    </frame>
+    <frame name='panda_joint_wrist' attached_to='panda_link8'>
+      <pose>0 0 0 0 0 0</pose>
+    </frame>
+    <frame name='panda_hand' attached_to='panda_joint_wrist'>
+      <pose>0 0 0 0 0 0</pose>
+    </frame>
+    <frame name='panda_link8_virtual_joint' attached_to='panda_link7'>
+      <pose>0 0 0.107 0 0 -0.78539816339744839</pose>
+    </frame>
+    <frame name='panda_link8' attached_to='panda_link8_virtual_joint'>
+      <pose>0 0 0 0 0 0</pose>
+    </frame>
   </model>
 </sdf>
