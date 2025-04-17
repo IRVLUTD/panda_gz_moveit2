@@ -1,4 +1,5 @@
-ARG ROS_DISTRO=galactic
+### Use ROS 2 Jazzy as the base image
+ARG ROS_DISTRO=jazzy
 FROM ros:${ROS_DISTRO}-ros-base
 
 ### Use bash by default
@@ -12,17 +13,27 @@ ENV WS_INSTALL_DIR=${WS_DIR}/install
 ENV WS_LOG_DIR=${WS_DIR}/log
 WORKDIR ${WS_DIR}
 
-### Install Gazebo
-ARG IGNITION_VERSION=fortress
-ENV IGNITION_VERSION=${IGNITION_VERSION}
+### Install Gazebo Harmonic
+ARG GAZEBO_VERSION=harmonic
+ENV GAZEBO_VERSION=${GAZEBO_VERSION}
 RUN apt-get update && \
     apt-get install -yq --no-install-recommends \
-    ignition-${IGNITION_VERSION} && \
+    gazebo-${GAZEBO_VERSION} && \
     rm -rf /var/lib/apt/lists/*
 
-### Import and install dependencies, then build these dependencies (not panda_ign_moveit2 yet)
-COPY ./panda_ign_moveit2.repos ${WS_SRC_DIR}/panda_ign_moveit2/panda_ign_moveit2.repos
-RUN vcs import --shallow ${WS_SRC_DIR} < ${WS_SRC_DIR}/panda_ign_moveit2/panda_ign_moveit2.repos && \
+### Install additional dependencies for ROS 2 and Gazebo
+RUN apt-get update && \
+    apt-get install -yq --no-install-recommends \
+    ros-${ROS_DISTRO}-xacro \
+    ros-${ROS_DISTRO}-ros2-control \
+    ros-${ROS_DISTRO}-gz-ros2-control    \
+    ros-${ROS_DISTRO}-moveit \
+    ros-${ROS_DISTRO}-moveit-servo && \
+    rm -rf /var/lib/apt/lists/*
+
+### Import and install dependencies, then build these dependencies (not panda_gz_moveit2 yet)
+COPY ./panda_gz_moveit2.repos ${WS_SRC_DIR}/panda_gz_moveit2/panda_gz_moveit2.repos
+RUN vcs import --shallow ${WS_SRC_DIR} < ${WS_SRC_DIR}/panda_gz_moveit2/panda_gz_moveit2.repos && \
     rosdep update && \
     apt-get update && \
     rosdep install -y -r -i --rosdistro "${ROS_DISTRO}" --from-paths ${WS_SRC_DIR} && \
@@ -31,8 +42,8 @@ RUN vcs import --shallow ${WS_SRC_DIR} < ${WS_SRC_DIR}/panda_ign_moveit2/panda_i
     colcon build --merge-install --symlink-install --cmake-args "-DCMAKE_BUILD_TYPE=Release" && \
     rm -rf ${WS_LOG_DIR}
 
-### Copy over the rest of panda_ign_moveit2, then install dependencies and build
-COPY ./ ${WS_SRC_DIR}/panda_ign_moveit2/
+### Copy over the rest of panda_gz_moveit2, then install dependencies and build
+COPY ./ ${WS_SRC_DIR}/panda_gz_moveit2/
 RUN rosdep update && \
     apt-get update && \
     rosdep install -y -r -i --rosdistro "${ROS_DISTRO}" --from-paths ${WS_SRC_DIR} && \
