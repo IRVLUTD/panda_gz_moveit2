@@ -2,7 +2,7 @@
 
 A complete ROS 2 workspace demonstrating the integration of **Gazebo simulator**, **MoveIt 2**, and **ros2_control** for robotic manipulation with the Franka Emika Panda robot.
 
-![Demo Video](https://github.com/user-attachments/assets/a9c81687-97bb-421d-9789-131ebb6f25f2)
+https://github.com/user-attachments/assets/a9c81687-97bb-421d-9789-131ebb6f25f2
 
 ## Supported versions
 
