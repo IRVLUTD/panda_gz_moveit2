@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- Macros that add Gazebo plugins for Franka Emika Panda -->
+<!-- Macros that add Ignition Gazebo plugins for Franka Emika Panda -->
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
   <!--       -->
@@ -9,7 +9,7 @@
    controller_parameters
   ">
     <gazebo>
-      <plugin name="gz_ros2_control::GazeboSimROS2ControlPlugin" filename="libgz_ros2_control-system">
+      <plugin filename="ign_ros2_control-system" name="ign_ros2_control::IgnitionROS2ControlPlugin">
         <parameters>${controller_parameters}</parameters>
       </plugin>
     </gazebo>
