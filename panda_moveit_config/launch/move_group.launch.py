@@ -125,12 +125,9 @@ def generate_launch_description():
     }
 
     # Kinematics
-    _robot_description_kinematics_yaml = load_yaml(
+    kinematics = load_yaml(
         moveit_config_package, path.join("config", "kinematics.yaml")
     )
-    robot_description_kinematics = {
-        "robot_description_kinematics": _robot_description_kinematics_yaml
-    }
 
     # Joint limits
     joint_limits = {
@@ -256,7 +253,7 @@ def generate_launch_description():
             parameters=[
                 robot_description,
                 robot_description_semantic,
-                robot_description_kinematics,
+                kinematics,
                 joint_limits,
                 planning_pipeline,
                 trajectory_execution,
@@ -274,7 +271,7 @@ def generate_launch_description():
             parameters=[
                 robot_description,
                 robot_description_semantic,
-                robot_description_kinematics,
+                kinematics,
                 joint_limits,
                 planning_pipeline,
                 trajectory_execution,
@@ -299,7 +296,7 @@ def generate_launch_description():
             parameters=[
                 robot_description,
                 robot_description_semantic,
-                robot_description_kinematics,
+                kinematics,
                 planning_pipeline,
                 joint_limits,
                 {"use_sim_time": use_sim_time},
@@ -422,8 +419,8 @@ def generate_declared_arguments() -> List[DeclareLaunchArgument]:
         ),
         DeclareLaunchArgument(
             "ros2_control_plugin",
-            default_value="gz",
-            description="The ros2_control plugin that should be loaded for the manipulator ('fake', 'gz', 'real' or custom).",
+            default_value="ign",
+            description="The ros2_control plugin that should be loaded for the manipulator ('fake', 'ign', 'real' or custom).",
         ),
         DeclareLaunchArgument(
             "ros2_control_command_interface",
