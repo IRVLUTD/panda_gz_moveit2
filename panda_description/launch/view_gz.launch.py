@@ -1,5 +1,5 @@
 #!/usr/bin/env -S ros2 launch
-"""Visualisation of SDF model for panda in Gazebo Harmonic. Note that the generated model://panda/model.sdf descriptor is used."""
+"""Visualisation of SDF model for panda in Ignition Gazebo. Note that the generated model://panda/model.sdf descriptor is used."""
 
 from os import path
 from typing import List
@@ -27,7 +27,7 @@ def generate_launch_description() -> LaunchDescription:
     world = LaunchConfiguration("world")
     model = LaunchConfiguration("model")
     use_sim_time = LaunchConfiguration("use_sim_time")
-    gz_verbosity = LaunchConfiguration("gz_verbosity")
+    ign_verbosity = LaunchConfiguration("ign_verbosity")
     log_level = LaunchConfiguration("log_level")
 
     # URDF
@@ -47,7 +47,7 @@ def generate_launch_description() -> LaunchDescription:
 
     # List of included launch descriptions
     launch_descriptions = [
-        # Launch Gazebo
+        # Launch Ignition Gazebo
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
                 PathJoinSubstitution(
@@ -58,7 +58,7 @@ def generate_launch_description() -> LaunchDescription:
                     ]
                 )
             ),
-            launch_arguments=[("gz_args", [world, " -v ", gz_verbosity])],
+            launch_arguments=[("gz_args", [world, " -v ", ign_verbosity])],
         ),
     ]
 
@@ -109,7 +109,7 @@ def generate_declared_arguments() -> List[DeclareLaunchArgument]:
             default_value=path.join("urdf", "panda.urdf.xacro"),
             description="Path to xacro or URDF description of the robot, relative to share of `description_package`.",
         ),
-        # World and model for Gazebo
+        # World and model for Ignition Gazebo
         DeclareLaunchArgument(
             "world",
             default_value="default.sdf",
@@ -127,9 +127,9 @@ def generate_declared_arguments() -> List[DeclareLaunchArgument]:
             description="If true, use simulated clock.",
         ),
         DeclareLaunchArgument(
-            "gz_verbosity",
+            "ign_verbosity",
             default_value="3",
-            description="Verbosity level for Gazebo (0~4).",
+            description="Verbosity level for Ignition Gazebo (0~4).",
         ),
         DeclareLaunchArgument(
             "log_level",

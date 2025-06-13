@@ -41,7 +41,7 @@ def generate_launch_description() -> LaunchDescription:
     gazebo_preserve_fixed_joint = LaunchConfiguration("gazebo_preserve_fixed_joint")
     rviz_config = LaunchConfiguration("rviz_config")
     use_sim_time = LaunchConfiguration("use_sim_time")
-    gz_verbosity = LaunchConfiguration("gz_verbosity")
+    ign_verbosity = LaunchConfiguration("ign_verbosity")
     log_level = LaunchConfiguration("log_level")
 
     # List of processes to be executed
@@ -83,7 +83,7 @@ def generate_launch_description() -> LaunchDescription:
                             )
                         ),
                         launch_arguments=[
-                            ("gz_args", [world, " -r -v ", gz_verbosity])
+                            ("gz_args", [world, " -r -v ", ign_verbosity])
                         ],
                     ),
                     # Launch move_group of MoveIt 2
@@ -240,7 +240,7 @@ def generate_declared_arguments() -> List[DeclareLaunchArgument]:
             description="If true, use simulated clock.",
         ),
         DeclareLaunchArgument(
-            "gz_verbosity",
+            "ign_verbosity",
             default_value="3",
             description="Verbosity level for Gazebo (0~4).",
         ),
