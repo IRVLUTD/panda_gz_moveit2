@@ -1,0 +1,694 @@
+<?xml version="1.1"?>
+<!-- Xacro for Franka Emika fetch arm -->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!--                   -->
+  <!-- Imported elements -->
+  <!--                   -->
+  <xacro:include filename="$(find fetch_description)/urdf/fetch_utils.xacro"/>
+  <xacro:include filename="$(find fetch_description)/urdf/fetch.ros2_control"/>
+
+  <!--            -->
+  <!-- Properties -->
+  <!--            -->
+  <xacro:property name="joint_base_name" value="joint_base"/>
+  <xacro:property name="joint_base_type" value="fixed"/>
+  
+  <!--       -->
+  <!-- Macro -->
+  <!--       -->
+  <xacro:property name="default_origin_xyz" value="0 0 0"/>
+  <xacro:property name="default_origin_rpy" value="0 0 0"/>
+  <xacro:macro name="fetch_arm" params="
+    base_parent
+    prefix:=fetch_
+    origin_xyz:=${default_origin_xyz}
+    origin_rpy:=${default_origin_rpy}
+    collision:=true
+    safety_limits:=false
+    safety_position_margin:=${1*pi/180}
+    safety_k_position:=100.0
+    safety_k_velocity:=40.0
+    ros2_control:=true
+    ros2_control_plugin:=fake
+    ros2_control_command_interface:=effort
+    gazebo_preserve_fixed_joint:=false
+  ">
+    <!-- Base link -->
+    <xacro:fetch_link
+    link_name="base_link"
+    mesh="base_link"
+    mesh_geometry="base_link.dae"
+    mesh_collision="base_link_collision.STL"
+    collision="${collision}"
+    mu="0.85"
+    />    
+    <xacro:fetch_joint
+    parent="${base_parent}"
+    child="base_link"
+    joint_name="${joint_base_name}"
+    joint_type="${joint_base_type}"
+    joint_origin_xyz="${origin_xyz}"
+    joint_origin_rpy="${origin_rpy}"
+    gazebo_preserve_fixed_joint="${gazebo_preserve_fixed_joint}"
+    />
+
+    <!-- r_wheel_link -->
+    <xacro:fetch_link
+    link_name="r_wheel_link"
+    mesh="r_wheel_link"
+    mesh_geometry="r_wheel_link.STL"
+    mesh_collision="r_wheel_link_collision.STL"
+    collision="${collision}"
+    mu="0.85"
+    />    
+    <xacro:fetch_joint
+    parent="base_link"
+    child="r_wheel_link"
+    joint_name="r_wheel_joint"
+    joint_type="continuous"
+    joint_origin_xyz="0.0012914 -0.18738 0.055325"
+    joint_origin_rpy="-6.123E-17 0 0"
+    joint_axis_xyz="0 1 0" 
+    joint_lower_limit="-3.14"
+    joint_upper_limit="3.14"
+    joint_velocity_limit="17.4"
+    joint_torque_limit="8.85"
+    safety_limits="${safety_limits}"
+    safety_position_margin="${safety_position_margin}"
+    safety_k_position="${safety_k_position}"
+    safety_k_velocity="${safety_k_velocity}"    
+    gazebo_preserve_fixed_joint="${gazebo_preserve_fixed_joint}"
+    />
+
+    <!-- l_wheel_link -->
+    <xacro:fetch_link
+    link_name="l_wheel_link"
+    mesh="l_wheel_link"
+    mesh_geometry="l_wheel_link.STL"
+    mesh_collision="l_wheel_link_collision.STL"    
+    collision="${collision}"
+    mu="0.85"
+    />    
+    <xacro:fetch_joint
+    parent="base_link"
+    child="l_wheel_link"
+    joint_name="l_wheel_joint"
+    joint_type="continuous"
+    joint_origin_xyz="0.0012914 0.18738 0.055325"
+    joint_origin_rpy="-6.123E-17 0 0"
+    joint_axis_xyz="0 1 0" 
+    joint_lower_limit="-3.14"
+    joint_upper_limit="3.14"
+    joint_velocity_limit="17.4"
+    joint_torque_limit="8.85"
+    safety_limits="${safety_limits}"
+    safety_position_margin="${safety_position_margin}"
+    safety_k_position="${safety_k_position}"
+    safety_k_velocity="${safety_k_velocity}"    
+    gazebo_preserve_fixed_joint="${gazebo_preserve_fixed_joint}"
+    />    
+
+    <!-- torso_lift_link -->
+    <xacro:fetch_link
+    link_name="torso_lift_link"
+    mesh="torso_lift_link"
+    mesh_geometry="torso_lift_link.dae"
+    mesh_collision="torso_lift_link_collision.STL"
+    collision="${collision}"
+    mu="0.85"
+    />    
+    <xacro:fetch_joint
+    parent="base_link"
+    child="torso_lift_link"
+    joint_name="torso_lift_joint"
+    joint_type="prismatic"
+    joint_origin_xyz="-0.086875 0 0.37743"
+    joint_origin_rpy="-6.123E-17 0 0"
+    joint_axis_xyz="0 0 1"
+    joint_lower_limit="0"
+    joint_upper_limit="0.38615"
+    joint_velocity_limit="0.1"
+    joint_torque_limit="450.0"
+    joint_damping="100.0"
+    safety_limits="${safety_limits}"
+    safety_position_margin="${safety_position_margin}"
+    safety_k_position="${safety_k_position}"
+    safety_k_velocity="${safety_k_velocity}"
+    gazebo_preserve_fixed_joint="${gazebo_preserve_fixed_joint}"
+    />
+
+
+    <!-- head_pan_link -->
+    <xacro:fetch_link
+    link_name="head_pan_link"
+    mesh="head_pan_link"
+    mesh_geometry="head_pan_link.dae"
+    mesh_collision="head_pan_link_collision.STL"
+    collision="${collision}"
+    mu="0.85"
+    />    
+    <xacro:fetch_joint
+    parent="torso_lift_link"
+    child="head_pan_link"
+    joint_name="head_pan_joint"
+    joint_type="revolute"
+    joint_origin_xyz="0.053125 0 0.603001417713939"
+    joint_origin_rpy="0 0 0"
+    joint_axis_xyz="0 0 1"
+    joint_lower_limit="-1.57"
+    joint_upper_limit="1.57"
+    joint_velocity_limit="1.57"
+    joint_torque_limit="0.32"
+    safety_limits="${safety_limits}"
+    safety_position_margin="${safety_position_margin}"
+    safety_k_position="${safety_k_position}"
+    safety_k_velocity="${safety_k_velocity}"
+    gazebo_preserve_fixed_joint="${gazebo_preserve_fixed_joint}"
+    />
+
+    <!-- head_tilt_link -->
+    <xacro:fetch_link
+    link_name="head_tilt_link"
+    mesh="head_tilt_link"
+    mesh_geometry="head_tilt_link.dae"
+    mesh_collision="head_tilt_link_collision.STL"    
+    collision="${collision}"
+    mu="0.85"
+    />    
+    <xacro:fetch_joint
+    parent="head_pan_link"
+    child="head_tilt_link"
+    joint_name="head_tilt_joint"
+    joint_type="revolute"
+    joint_origin_xyz="0.14253 0 0.057999"
+    joint_origin_rpy="0 0 0"
+    joint_axis_xyz="0 1 0"
+    joint_lower_limit="-0.76"
+    joint_upper_limit="1.45"
+    joint_velocity_limit="1.57"
+    joint_torque_limit="0.68"
+    safety_limits="${safety_limits}"
+    safety_position_margin="${safety_position_margin}"
+    safety_k_position="${safety_k_position}"
+    safety_k_velocity="${safety_k_velocity}"
+    gazebo_preserve_fixed_joint="${gazebo_preserve_fixed_joint}"
+    />
+
+    <!-- shoulder_pan_link -->
+    <xacro:fetch_link
+    link_name="shoulder_pan_link"
+    mesh="shoulder_pan_link"
+    mesh_geometry="shoulder_pan_link.dae"
+    mesh_collision="shoulder_pan_link_collision.STL"
+    collision="${collision}"
+    mu="0.85"
+    />    
+    <xacro:fetch_joint
+    parent="torso_lift_link"
+    child="shoulder_pan_link"
+    joint_name="shoulder_pan_joint"
+    joint_type="revolute"
+    joint_origin_xyz="0.119525 0 0.34858"
+    joint_origin_rpy="0 0 0"
+    joint_axis_xyz="0 0 1"
+    joint_lower_limit="-1.6056"
+    joint_upper_limit="1.6056"
+    joint_velocity_limit="1.256"
+    joint_torque_limit="33.82"
+    joint_damping="1.0"
+    safety_limits="${safety_limits}"
+    safety_position_margin="${safety_position_margin}"
+    safety_k_position="${safety_k_position}"
+    safety_k_velocity="${safety_k_velocity}"
+    gazebo_preserve_fixed_joint="${gazebo_preserve_fixed_joint}"
+    />    
+
+    <!-- shoulder_lift_link -->
+    <xacro:fetch_link
+    link_name="shoulder_lift_link"
+    mesh="shoulder_lift_link"
+    mesh_geometry="shoulder_lift_link.dae"
+    mesh_collision="shoulder_lift_link_collision.STL"    
+    collision="${collision}"
+    mu="0.85"
+    />    
+    <xacro:fetch_joint
+    parent="shoulder_pan_link"
+    child="shoulder_lift_link"
+    joint_name="shoulder_lift_joint"
+    joint_type="revolute"
+    joint_origin_xyz="0.117 0 0.0599999999999999"
+    joint_origin_rpy="0 0 0"
+    joint_axis_xyz="0 1 0"
+    joint_lower_limit="-1.221"
+    joint_upper_limit="1.518"
+    joint_velocity_limit="1.454"
+    joint_torque_limit="131.76"
+    joint_damping="1.0"
+    safety_limits="${safety_limits}"
+    safety_position_margin="${safety_position_margin}"
+    safety_k_position="${safety_k_position}"
+    safety_k_velocity="${safety_k_velocity}"
+    gazebo_preserve_fixed_joint="${gazebo_preserve_fixed_joint}"
+    />       
+
+    <!-- upperarm_roll_link -->
+    <xacro:fetch_link
+    link_name="upperarm_roll_link"
+    mesh="upperarm_roll_link"
+    mesh_geometry="upperarm_roll_link.dae"
+    mesh_collision="upperarm_roll_link_collision.STL"      
+    collision="${collision}"
+    mu="0.85"
+    />    
+    <xacro:fetch_joint
+    parent="shoulder_lift_link"
+    child="upperarm_roll_link"
+    joint_name="upperarm_roll_joint"
+    joint_type="continuous"
+    joint_origin_xyz="0.219 0 0"
+    joint_origin_rpy="0 0 0"
+    joint_axis_xyz="1 0 0"
+    joint_lower_limit="-3.14"
+    joint_upper_limit="3.14"
+    joint_velocity_limit="1.571"
+    joint_torque_limit="76.94"
+    joint_damping="5.0"
+    safety_limits="${safety_limits}"
+    safety_position_margin="${safety_position_margin}"
+    safety_k_position="${safety_k_position}"
+    safety_k_velocity="${safety_k_velocity}"
+    gazebo_preserve_fixed_joint="${gazebo_preserve_fixed_joint}"
+    />    
+
+    <!-- elbow_flex_link -->
+    <xacro:fetch_link
+    link_name="elbow_flex_link"
+    mesh="elbow_flex_link"
+    mesh_geometry="elbow_flex_link.dae"
+    mesh_collision="elbow_flex_link_collision.STL"       
+    collision="${collision}"
+    mu="0.85"
+    />    
+    <xacro:fetch_joint
+    parent="upperarm_roll_link"
+    child="elbow_flex_link"
+    joint_name="elbow_flex_joint"
+    joint_type="revolute"
+    joint_origin_xyz="0.133 0 0"
+    joint_origin_rpy="0 0 0"
+    joint_axis_xyz="0 1 0"
+    joint_lower_limit="-2.251"
+    joint_upper_limit="2.251"
+    joint_velocity_limit="1.521"
+    joint_torque_limit="66.18"
+    joint_damping="1.0"
+    safety_limits="${safety_limits}"
+    safety_position_margin="${safety_position_margin}"
+    safety_k_position="${safety_k_position}"
+    safety_k_velocity="${safety_k_velocity}"
+    gazebo_preserve_fixed_joint="${gazebo_preserve_fixed_joint}"
+    />    
+
+    <!-- forearm_roll_link -->
+    <xacro:fetch_link
+    link_name="forearm_roll_link"
+    mesh="forearm_roll_link"
+    mesh_geometry="forearm_roll_link.dae"
+    mesh_collision="forearm_roll_link_collision.STL"     
+    collision="${collision}"
+    mu="0.85"
+    />    
+    <xacro:fetch_joint
+    parent="elbow_flex_link"
+    child="forearm_roll_link"
+    joint_name="forearm_roll_joint"
+    joint_type="continuous"
+    joint_origin_xyz="0.197 0 0"
+    joint_origin_rpy="0 0 0"
+    joint_axis_xyz="1 0 0"
+    joint_lower_limit="-3.14"
+    joint_upper_limit="3.14"
+    joint_velocity_limit="1.571"
+    joint_torque_limit="29.35"
+    joint_damping="5.0"
+    safety_limits="${safety_limits}"
+    safety_position_margin="${safety_position_margin}"
+    safety_k_position="${safety_k_position}"
+    safety_k_velocity="${safety_k_velocity}"
+    gazebo_preserve_fixed_joint="${gazebo_preserve_fixed_joint}"
+    />    
+
+    <!-- wrist_flex_link -->
+    <xacro:fetch_link
+    link_name="wrist_flex_link"
+    mesh="wrist_flex_link"
+    mesh_geometry="wrist_flex_link.dae"
+    mesh_collision="wrist_flex_link_collision.STL"       
+    collision="${collision}"
+    mu="0.85"
+    />    
+    <xacro:fetch_joint
+    parent="forearm_roll_link"
+    child="wrist_flex_link"
+    joint_name="wrist_flex_joint"
+    joint_type="revolute"
+    joint_origin_xyz="0.1245 0 0"
+    joint_origin_rpy="0 0 0"
+    joint_axis_xyz="0 1 0"
+    joint_lower_limit="-2.16"
+    joint_upper_limit="-2.16"
+    joint_velocity_limit="2.268"
+    joint_torque_limit="25.7"
+    joint_damping="1.0"
+    safety_limits="${safety_limits}"
+    safety_position_margin="${safety_position_margin}"
+    safety_k_position="${safety_k_position}"
+    safety_k_velocity="${safety_k_velocity}"
+    gazebo_preserve_fixed_joint="${gazebo_preserve_fixed_joint}"
+    />   
+
+    <!-- wrist_roll_link -->
+    <xacro:fetch_link
+    link_name="wrist_roll_link"
+    mesh="wrist_roll_link"
+    mesh_geometry="wrist_roll_link.dae"
+    mesh_collision="wrist_roll_link_collision.STL"     
+    collision="${collision}"
+    mu="0.85"
+    />    
+    <xacro:fetch_joint
+    parent="wrist_flex_link"
+    child="wrist_roll_link"
+    joint_name="wrist_roll_joint"
+    joint_type="continuous"
+    joint_origin_xyz="0.1385 0 0"
+    joint_origin_rpy="0 0 0"
+    joint_axis_xyz="1 0 0"
+    joint_lower_limit="-3.14"
+    joint_upper_limit="-3.14"
+    joint_velocity_limit="2.268"
+    joint_torque_limit="7.36"
+    joint_damping="5.0"
+    safety_limits="${safety_limits}"
+    safety_position_margin="${safety_position_margin}"
+    safety_k_position="${safety_k_position}"
+    safety_k_velocity="${safety_k_velocity}"
+    gazebo_preserve_fixed_joint="${gazebo_preserve_fixed_joint}"
+    />    
+
+    <!-- gripper_link -->
+    <xacro:fetch_link
+    link_name="gripper_link"
+    mesh="gripper_link"
+    mesh_geometry="gripper_link.dae"
+    mesh_collision="gripper_link.STL"     
+    collision="${collision}"
+    mu="0.85"
+    />    
+    <xacro:fetch_joint
+    parent="wrist_roll_link"
+    child="gripper_link"
+    joint_name="gripper_axis"
+    joint_type="fixed"
+    joint_origin_xyz="0.16645 0 0"
+    joint_origin_rpy="0 0 0"
+    joint_axis_xyz="0 1 0"
+    gazebo_preserve_fixed_joint="${gazebo_preserve_fixed_joint}"
+    /> 
+
+    <!-- r_gripper_finger_link -->
+    <xacro:fetch_link
+    link_name="r_gripper_finger_link"
+    mesh="r_gripper_finger_link"
+    mesh_geometry="r_gripper_finger_link.STL"
+    mesh_collision="r_gripper_finger_link.STL"
+    mesh_offset_xyz="0 0.101425 0"      
+    collision="${collision}"
+    mu="0.85"
+    />    
+    <xacro:fetch_joint
+    parent="gripper_link"
+    child="r_gripper_finger_link"
+    joint_name="r_gripper_finger_joint"
+    joint_type="prismatic"
+    joint_origin_xyz="0 0.015425 0"
+    joint_origin_rpy="0 0 0"
+    joint_axis_xyz="0 1 0"
+    joint_lower_limit="0.0"
+    joint_upper_limit="0.05"
+    joint_velocity_limit="0.05"
+    joint_torque_limit="60"
+    joint_damping="100.0"
+    safety_limits="${safety_limits}"
+    safety_position_margin="${safety_position_margin}"
+    safety_k_position="${safety_k_position}"
+    safety_k_velocity="${safety_k_velocity}"
+    gazebo_preserve_fixed_joint="${gazebo_preserve_fixed_joint}"
+    />  
+
+    <!-- l_gripper_finger_link -->
+    <xacro:fetch_link
+    link_name="l_gripper_finger_link"
+    mesh="l_gripper_finger_link"
+    mesh_geometry="l_gripper_finger_link.STL"
+    mesh_collision="l_gripper_finger_link.STL"
+    mesh_offset_xyz="0 -0.101425 0"         
+    collision="${collision}"
+    mu="0.85"
+    />    
+    <xacro:fetch_joint
+    parent="gripper_link"
+    child="l_gripper_finger_link"
+    joint_name="l_gripper_finger_joint"
+    joint_type="prismatic"
+    joint_origin_xyz="0 -0.015425 0"
+    joint_origin_rpy="0 0 0"
+    joint_axis_xyz="0 -1 0"
+    joint_lower_limit="0.0"
+    joint_upper_limit="0.05"
+    joint_velocity_limit="0.05"
+    joint_torque_limit="60"
+    joint_damping="100.0"
+    safety_limits="${safety_limits}"
+    safety_position_margin="${safety_position_margin}"
+    safety_k_position="${safety_k_position}"
+    safety_k_velocity="${safety_k_velocity}"
+    gazebo_preserve_fixed_joint="${gazebo_preserve_fixed_joint}"
+    />    
+
+    <!-- bellows_link -->
+    <xacro:fetch_link
+    link_name="bellows_link"
+    mesh="bellows_link"
+    mesh_geometry="bellows_link.STL"
+    mesh_collision="bellows_link_collision.STL"      
+    collision="${collision}"
+    mu="0.85"
+    />    
+    <xacro:fetch_joint
+    parent="torso_lift_link"
+    child="bellows_link"
+    joint_name="bellows_joint"
+    joint_type="prismatic"
+    joint_origin_xyz="0 0 0"
+    joint_origin_rpy="0 0 0"
+    joint_axis_xyz="0 0 -1"
+    joint_lower_limit="0.0"
+    joint_upper_limit="0.4"
+    joint_velocity_limit="0.1"
+    joint_torque_limit="5.0"
+    safety_limits="${safety_limits}"
+    safety_position_margin="${safety_position_margin}"
+    safety_k_position="${safety_k_position}"
+    safety_k_velocity="${safety_k_velocity}"
+    gazebo_preserve_fixed_joint="${gazebo_preserve_fixed_joint}"
+    />        
+
+    <!-- bellows_link2 -->
+    <xacro:fetch_link
+    link_name="bellows_link2"
+    mesh="bellows_link"
+    mesh_geometry="bellows_link.STL"
+    mesh_collision="bellows_link_collision.STL"        
+    collision="${collision}"
+    mu="0.85"
+    />    
+    <xacro:fetch_joint
+    parent="torso_lift_link"
+    child="bellows_link2"
+    joint_name="bellows_joint2"
+    joint_type="fixed"
+    joint_origin_xyz="0 0 0"
+    joint_origin_rpy="0 0 0"
+    gazebo_preserve_fixed_joint="${gazebo_preserve_fixed_joint}"
+    />   
+
+    <!-- estop_link -->
+    <xacro:fetch_link
+    link_name="estop_link"
+    mesh="estop_link"
+    mesh_geometry="estop_link.dae"
+    mesh_collision="estop_link.STL"      
+    collision="${collision}"
+    mu="0.85"
+    />    
+    <xacro:fetch_joint
+    parent="base_link"
+    child="estop_link"
+    joint_name="estop_joint"
+    joint_type="fixed"
+    joint_origin_xyz="-0.12465 0.23892 0.31127"
+    joint_origin_rpy="1.5708 0 0"
+    joint_axis_xyz="0 0 0"
+    gazebo_preserve_fixed_joint="${gazebo_preserve_fixed_joint}"
+    />    
+
+    <!-- laser_link -->
+    <xacro:fetch_link
+    link_name="laser_link"
+    mesh="laser_link"
+    mesh_geometry="laser_link.STL"
+    mesh_collision="laser_link.STL"     
+    collision="${collision}"
+    mu="0.85"
+    />    
+    <xacro:fetch_joint
+    parent="base_link"
+    child="laser_link"
+    joint_name="laser_joint"
+    joint_type="fixed"
+    joint_origin_xyz="0.235 0 0.2878"
+    joint_origin_rpy="3.14159265359 0 0"
+    joint_axis_xyz="0 0 0"
+    gazebo_preserve_fixed_joint="${gazebo_preserve_fixed_joint}"
+    />      
+
+    <!-- torso_fixed_link -->
+    <xacro:fetch_link
+    link_name="torso_fixed_link"
+    mesh="torso_fixed_link"
+    mesh_geometry="torso_fixed_link.dae"
+    mesh_collision="torso_fixed_link.STL"      
+    collision="${collision}"
+    mu="0.85"
+    />    
+    <xacro:fetch_joint
+    parent="base_link"
+    child="torso_fixed_link"
+    joint_name="torso_fixed_joint"
+    joint_type="fixed"
+    joint_origin_xyz="-0.086875 0 0.377425"
+    joint_origin_rpy="-6.12303176911189E-17 0 0"
+    joint_axis_xyz="0 1 0"
+    gazebo_preserve_fixed_joint="${gazebo_preserve_fixed_joint}"
+    />    
+
+    <!-- head_camera_link -->
+    <xacro:fetch_link
+    link_name="head_camera_link"
+    mesh="head_camera_link"
+    mesh_geometry=""
+    mesh_collision=""
+    visual="false"
+    collision="false"
+    mu="0.85"
+    />    
+    <xacro:fetch_joint
+    parent="head_tilt_link"
+    child="head_camera_link"
+    joint_name="head_camera_joint"
+    joint_type="fixed"
+    joint_origin_xyz="0.055 0 0.0225"
+    joint_origin_rpy="0 0 0"
+    gazebo_preserve_fixed_joint="${gazebo_preserve_fixed_joint}"
+    />
+
+    <!-- head_camera_rgb_frame -->
+    <xacro:fetch_link
+    link_name="head_camera_rgb_frame"
+    mesh="head_camera_rgb_frame"
+    mesh_geometry=""
+    mesh_collision=""
+    visual="false"
+    collision="false"
+    mu="0.85"
+    />    
+    <xacro:fetch_joint
+    parent="head_camera_link"
+    child="head_camera_rgb_frame"
+    joint_name="head_camera_rgb_joint"
+    joint_type="fixed"
+    joint_origin_xyz="0 0.02 0"
+    joint_origin_rpy="0 0 0"
+    gazebo_preserve_fixed_joint="${gazebo_preserve_fixed_joint}"
+    />      
+
+    <!-- head_camera_rgb_optical_frame -->
+    <xacro:fetch_link
+    link_name="head_camera_rgb_optical_frame"
+    mesh="head_camera_rgb_optical_frame"
+    mesh_geometry=""
+    mesh_collision=""
+    visual="false"
+    collision="false"
+    mu="0.85"
+    />    
+    <xacro:fetch_joint
+    parent="head_camera_rgb_frame"
+    child="head_camera_rgb_optical_frame"
+    joint_name="head_camera_rgb_optical_joint"
+    joint_type="fixed"
+    joint_origin_xyz="0 0 0"
+    joint_origin_rpy="-1.57079632679 0 -1.57079632679"
+    gazebo_preserve_fixed_joint="${gazebo_preserve_fixed_joint}"
+    />
+
+    <!-- head_camera_depth_frame -->
+    <xacro:fetch_link
+    link_name="head_camera_depth_frame"
+    mesh="head_camera_depth_frame"
+    mesh_geometry=""
+    mesh_collision=""
+    visual="false"
+    collision="false"
+    mu="0.85"
+    />    
+    <xacro:fetch_joint
+    parent="head_camera_link"
+    child="head_camera_depth_frame"
+    joint_name="head_camera_depth_joint"
+    joint_type="fixed"
+    joint_origin_xyz="0 0.045 0"
+    joint_origin_rpy="0 0 0"
+    gazebo_preserve_fixed_joint="${gazebo_preserve_fixed_joint}"
+    />     
+
+    <!-- head_camera_depth_optical_frame -->
+    <xacro:fetch_link
+    link_name="head_camera_depth_optical_frame"
+    mesh="head_camera_depth_optical_frame"
+    mesh_geometry=""
+    mesh_collision=""
+    visual="false"
+    collision="false"
+    mu="0.85"
+    />    
+    <xacro:fetch_joint
+    parent="head_camera_depth_frame"
+    child="head_camera_depth_optical_frame"
+    joint_name="head_camera_depth_optical_joint"
+    joint_type="fixed"
+    joint_origin_xyz="0 0 0"
+    joint_origin_rpy="-1.57079632679 0 -1.57079632679"
+    gazebo_preserve_fixed_joint="${gazebo_preserve_fixed_joint}"
+    />
+
+    <!-- ROS 2 control -->
+    <xacro:if value="${ros2_control}">
+      <xacro:ros2_control_fetch_arm prefix="${prefix}" plugin="${ros2_control_plugin}" command_interface="${ros2_control_command_interface}"/>
+    </xacro:if>
+  </xacro:macro>
+
+</robot>

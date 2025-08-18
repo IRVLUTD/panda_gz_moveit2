@@ -28,7 +28,7 @@ def generate_launch_description() -> LaunchDescription:
             PythonLaunchDescriptionSource(
                 PathJoinSubstitution(
                     [
-                        FindPackageShare("panda_moveit_config"),
+                        FindPackageShare("fetch_moveit_config"),
                         "launch",
                         "move_group.launch.py",
                     ]

@@ -727,7 +727,7 @@
       </visual>
     </link>
     <plugin name='gz_ros2_control::GazeboSimROS2ControlPlugin' filename='libgz_ros2_control-system.so'>
-      <parameters>/home/kb/OSRF_Contribution/install/panda_moveit_config/share/panda_moveit_config/config/controllers_effort.yaml</parameters>
+      <parameters>/data/ros2_ws/install/share/panda_moveit_config/config/controllers_effort.yaml</parameters>
     </plugin>
     <frame name='panda_hand_tcp_virtual_joint' attached_to='panda_hand'>
       <pose>0 0 0.10340000000000001 0 0 0</pose>

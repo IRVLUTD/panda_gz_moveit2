@@ -1,0 +1,12 @@
+initial_joint_positions:
+  fetch_arm:
+    shoulder_pan_joint: 1.32
+    shoulder_lift_joint: 0.7
+    upperarm_roll_joint: 0.0
+    elbow_flex_joint: -2.0
+    forearm_roll_joint: 0.0
+    wrist_flex_joint: -0.57
+    wrist_roll_joint: 0.0
+  fetch_gripper:
+    r_gripper_finger_joint: 0.05
+    l_gripper_finger_joint: 0.05
