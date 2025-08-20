@@ -126,7 +126,7 @@
       <inertial>
         <origin xyz="-0.01 0 0" rpy="${mesh_offset_rpy}"/>
         <mass value="0.0798"/>
-        <inertia ixx="0.002" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
+        <inertia ixx="5.959597e-06" ixy="0" ixz="0" iyy="3.65197385e-05" iyz="0" izz="3.32798585e-05" />
       </inertial>
     </xacro:if>          
 
@@ -134,7 +134,7 @@
       <inertial>
         <origin xyz="-0.01 0 0" rpy="${mesh_offset_rpy}"/>
         <mass value="0.0798"/>
-        <inertia ixx="0.002" ixy="0" ixz="0" iyy="0" iyz="0" izz="0" />
+        <inertia ixx="5.959597e-06" ixy="0" ixz="0" iyy="3.65197385e-05" iyz="0" izz="3.32798585e-05" />
       </inertial>
     </xacro:if>
 

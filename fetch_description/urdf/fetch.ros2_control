@@ -23,7 +23,7 @@
     <ros2_control name="${name}" type="system">
       <hardware>
         <xacro:if value="${plugin == 'fake'}">
-          <plugin>fake_components/GenericSystem</plugin>
+          <plugin>mock_components/GenericSystem</plugin>
         </xacro:if>
         <xacro:if value="${plugin == 'gz'}">
           <plugin>gz_ros2_control/GazeboSimSystem</plugin>
@@ -174,7 +174,7 @@
     <ros2_control name="${name}" type="system">
       <hardware>
         <xacro:if value="${plugin == 'fake'}">
-          <plugin>fake_components/GenericSystem</plugin>
+          <plugin>mock_components/GenericSystem</plugin>
         </xacro:if>
         <xacro:if value="${plugin == 'gz'}">
           <plugin>gz_ros2_control/GazeboSimSystem</plugin>

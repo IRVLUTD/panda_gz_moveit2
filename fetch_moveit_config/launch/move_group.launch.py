@@ -152,6 +152,11 @@ def generate_launch_description():
     }
     servo_params["moveit_servo"].update({"use_gazebo": use_sim_time})
 
+    # sensors 3D
+    sensors_3d = load_yaml(
+            moveit_config_package, path.join("config", "sensors_3d.yaml")
+        )
+
     # Planning pipeline
     planning_pipeline = {
         "planning_pipelines": ["ompl"],
@@ -273,6 +278,7 @@ def generate_launch_description():
                 joint_limits,
                 planning_pipeline,
                 trajectory_execution,
+                sensors_3d,
                 planning_scene_monitor_parameters,
                 moveit_controller_manager,
                 {"use_sim_time": use_sim_time},
