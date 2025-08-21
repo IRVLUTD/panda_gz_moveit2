@@ -8,6 +8,7 @@ joint_trajectory_controller:
   type: FollowJointTrajectory
   default: true
   joints:
+    - torso_lift_joint
     - shoulder_pan_joint
     - shoulder_lift_joint
     - upperarm_roll_joint

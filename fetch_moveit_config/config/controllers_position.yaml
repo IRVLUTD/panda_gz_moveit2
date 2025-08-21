@@ -14,6 +14,7 @@ controller_manager:
 joint_trajectory_controller:
   ros__parameters:
     joints:
+      - torso_lift_joint
       - shoulder_pan_joint
       - shoulder_lift_joint
       - upperarm_roll_joint

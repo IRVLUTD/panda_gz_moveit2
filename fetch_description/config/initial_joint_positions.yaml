@@ -1,5 +1,6 @@
 initial_joint_positions:
   fetch_arm:
+    torso_lift_joint: 0.38
     shoulder_pan_joint: 1.32
     shoulder_lift_joint: 0.7
     upperarm_roll_joint: 0.0

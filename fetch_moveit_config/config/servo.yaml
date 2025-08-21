@@ -25,7 +25,7 @@ smoothing_filter_plugin_name: "online_signal_smoothing::ButterworthFilterPlugin"
 low_pass_filter_coeff: 1.05
 
 ## MoveIt properties
-move_group_name: arm # Often 'manipulator' or 'arm'
+move_group_name: arm_with_torso # Often 'manipulator' or 'arm'
 planning_frame: base_link # The MoveIt planning frame. Often 'base_link' or 'world'
 
 ## Other frames

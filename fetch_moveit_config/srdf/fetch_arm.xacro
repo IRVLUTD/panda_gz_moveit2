@@ -8,7 +8,8 @@
   <xacro:macro name="fetch_arm" params="
     prefix:=fetch_
   ">
-    <group name="arm">
+    <group name="arm_with_torso">
+      <joint name="torso_lift_joint" />
       <joint name="shoulder_pan_joint" />
       <joint name="shoulder_lift_joint" />
       <joint name="upperarm_roll_joint" />
@@ -18,7 +19,8 @@
       <joint name="wrist_roll_joint" />
     </group>
 
-    <group_state group="arm" name="ready">
+    <group_state group="arm_with_torso" name="ready">
+      <joint name="torso_lift_joint" value="0.38"/>
       <joint name="shoulder_pan_joint" value="1.32"/>
       <joint name="shoulder_lift_joint" value="0.7"/>
       <joint name="upperarm_roll_joint" value="0.0"/>

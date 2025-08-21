@@ -132,7 +132,7 @@
     joint_torque_limit="450.0"
     joint_damping="100.0"
     safety_limits="${safety_limits}"
-    safety_position_margin="${safety_position_margin}"
+    safety_position_margin="0.001"
     safety_k_position="${safety_k_position}"
     safety_k_velocity="${safety_k_velocity}"
     gazebo_preserve_fixed_joint="${gazebo_preserve_fixed_joint}"
