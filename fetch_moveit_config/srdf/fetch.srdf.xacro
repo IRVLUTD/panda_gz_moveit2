@@ -36,7 +36,7 @@
     prefix="${prefix_gripper}"
   />
 
-  <end_effector group="gripper" name="gripper" parent_group="arm" parent_link="wrist_roll_link"  />
+  <end_effector group="gripper" name="gripper" parent_group="arm_with_torso" parent_link="wrist_roll_link"  />
 
   <disable_collisions link1="base_link" link2="bellows_link" reason="Default" />
   <disable_collisions link1="base_link" link2="bellows_link2" reason="Default" />
