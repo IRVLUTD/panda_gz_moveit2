@@ -1,6 +1,6 @@
 sensors:
   - head_camera_pointcloud
-camera_1_pointcloud:
+head_camera_pointcloud:
     sensor_plugin: occupancy_map_monitor/PointCloudOctomapUpdater
     point_cloud_topic: /head_camera/points
     max_range: 1.5

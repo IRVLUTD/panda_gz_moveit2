@@ -358,7 +358,7 @@
     joint_origin_rpy="0 0 0"
     joint_axis_xyz="0 1 0"
     joint_lower_limit="-2.16"
-    joint_upper_limit="-2.16"
+    joint_upper_limit="2.16"
     joint_velocity_limit="2.268"
     joint_torque_limit="25.7"
     joint_damping="1.0"
