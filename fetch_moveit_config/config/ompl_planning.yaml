@@ -23,21 +23,6 @@ planner_configs:
     type: geometric::PRM
   PRMstarkConfigDefault:
     type: geometric::PRMstar
-arm:
-  planner_configs:
-    - SBLkConfigDefault
-    - ESTkConfigDefault
-    - LBKPIECEkConfigDefault
-    - BKPIECEkConfigDefault
-    - KPIECEkConfigDefault
-    - RRTkConfigDefault
-    - RRTConnectkConfigDefault
-    - RRTstarkConfigDefault
-    - TRRTkConfigDefault
-    - PRMkConfigDefault
-    - PRMstarkConfigDefault
-  projection_evaluator: joints(shoulder_pan_joint,shoulder_lift_joint)
-  longest_valid_segment_fraction: 0.005
 arm_with_torso:
   planner_configs:
     - SBLkConfigDefault
@@ -65,4 +50,4 @@ gripper:
     - RRTstarkConfigDefault
     - TRRTkConfigDefault
     - PRMkConfigDefault
-    - PRMstarkConfigDefault
+    - PRMstarkConfigDefault  

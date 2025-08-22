@@ -8,6 +8,11 @@ initial_joint_positions:
     forearm_roll_joint: 0.0
     wrist_flex_joint: -0.57
     wrist_roll_joint: 0.0
+    l_wheel_joint: 0.0
+    r_wheel_joint: 0.0
+    bellows_joint: 0.38
+    head_pan_joint: 0.0
+    head_tilt_joint: 0.0    
   fetch_gripper:
     r_gripper_finger_joint: 0.05
     l_gripper_finger_joint: 0.05

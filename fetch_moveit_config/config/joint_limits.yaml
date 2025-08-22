@@ -52,3 +52,28 @@ joint_limits:
     max_velocity: 2.26
     has_acceleration_limits: true
     max_acceleration: 2.5
+  l_wheel_joint: 
+    has_velocity_limits: true
+    max_velocity: 0.1
+    has_acceleration_limits: true
+    max_acceleration: 0.5
+  r_wheel_joint: 
+    has_velocity_limits: true
+    max_velocity: 0.1
+    has_acceleration_limits: true
+    max_acceleration: 0.5
+  bellows_joint: 
+    has_velocity_limits: true
+    max_velocity: 0.1
+    has_acceleration_limits: true
+    max_acceleration: 0.5
+  head_pan_joint: 
+    has_velocity_limits: true
+    max_velocity: 0.1
+    has_acceleration_limits: true
+    max_acceleration: 0.5
+  head_tilt_joint: 
+    has_velocity_limits: true
+    max_velocity: 0.1
+    has_acceleration_limits: true
+    max_acceleration: 0.5         
