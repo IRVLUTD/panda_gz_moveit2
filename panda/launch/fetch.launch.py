@@ -44,6 +44,14 @@ def generate_launch_description() -> LaunchDescription:
     gz_verbosity = LaunchConfiguration("gz_verbosity")
     log_level = LaunchConfiguration("log_level")
 
+    world = PathJoinSubstitution(
+            [
+                FindPackageShare("fetch_moveit_config"),
+                "models",
+                world,
+            ]
+        )
+
     # List of processes to be executed
     # xacro2sdf
     xacro2sdf = ExecuteProcess(
@@ -156,7 +164,7 @@ def generate_launch_description() -> LaunchDescription:
                             log_level,
                         ],
                         parameters=[{"use_sim_time": use_sim_time}],
-                    ),
+                    ),               
                 ],
             )
         ),
@@ -187,7 +195,7 @@ def generate_declared_arguments() -> List[DeclareLaunchArgument]:
         # SDF world for Gazebo
         DeclareLaunchArgument(
             "world",
-            default_value="default.sdf",
+            default_value="table_cube_world.sdf",
             description="Name or filepath of the Gazebo world to load.",
         ),
         # Naming of the robot
