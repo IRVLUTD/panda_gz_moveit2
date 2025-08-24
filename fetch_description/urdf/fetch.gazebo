@@ -12,6 +12,11 @@
       <plugin name="gz_ros2_control::GazeboSimROS2ControlPlugin" filename="libgz_ros2_control-system.so">
         <parameters>${controller_parameters}</parameters>
       </plugin>
+      <plugin
+        filename="gz-sim-sensors-system"
+        name="gz::sim::systems::Sensors">
+        <render_engine>ogre2</render_engine>
+      </plugin>      
     </gazebo>
   </xacro:macro>
 

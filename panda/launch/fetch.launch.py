@@ -155,10 +155,12 @@ def generate_launch_description() -> LaunchDescription:
                     # ros_gz_bridge (clock -> ROS 2)
                     Node(
                         package="ros_gz_bridge",
-                        executable="parameter_bridge",
+                        executable="parameter_bridge",  
                         output="log",
                         arguments=[
                             "/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock",
+                            "/camera@sensor_msgs/msg/Image@gz.msgs.Image",
+                            "/camera_info@sensor_msgs/msg/CameraInfo@gz.msgs.CameraInfo",
                             "--ros-args",
                             "--log-level",
                             log_level,

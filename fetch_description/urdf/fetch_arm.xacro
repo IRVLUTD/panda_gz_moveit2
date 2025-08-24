@@ -605,6 +605,27 @@
     gazebo_preserve_fixed_joint="${gazebo_preserve_fixed_joint}"
     />
 
+    <!-- Primesense Carmine 1.09 -->
+    <gazebo reference="head_camera_rgb_frame">
+      <sensor name="camera" type="camera">
+        <camera>
+          <horizontal_fov>1.047197</horizontal_fov>
+          <image>
+            <width>640</width>
+            <height>480</height>
+          </image>
+          <clip>
+            <near>0.05</near>
+            <far>50</far>
+          </clip>
+        </camera>
+        <always_on>true</always_on>
+        <topic>camera</topic>
+        <update_rate>15.0</update_rate>
+        <visualize>true</visualize>
+      </sensor>
+    </gazebo>
+
     <!-- ROS 2 control -->
     <xacro:if value="${ros2_control}">
       <xacro:ros2_control_fetch_arm prefix="${prefix}" plugin="${ros2_control_plugin}" command_interface="${ros2_control_command_interface}"/>
