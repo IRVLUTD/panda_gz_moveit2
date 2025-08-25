@@ -9,6 +9,7 @@ import yaml
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
+from launch.actions import TimerAction
 from launch.conditions import IfCondition
 from launch.substitutions import (
     Command,
@@ -303,28 +304,6 @@ def generate_launch_description():
             ],
             condition=IfCondition(enable_servo),
         ),
-        # rviz2
-        Node(
-            package="rviz2",
-            executable="rviz2",
-            output="log",
-            arguments=[
-                "--display-config",
-                rviz_config,
-                "--ros-args",
-                "--log-level",
-                log_level,
-            ],
-            parameters=[
-                robot_description,
-                robot_description_semantic,
-                robot_description_kinematics,
-                planning_pipeline,
-                joint_limits,
-                {"use_sim_time": use_sim_time},
-            ],
-            condition=IfCondition(enable_rviz),
-        ),
     ]
 
     # Add nodes for loading controllers
@@ -341,6 +320,35 @@ def generate_launch_description():
                 parameters=[{"use_sim_time": use_sim_time}],
             ),
         )
+
+    # rviz2
+    rviz_node = Node(
+        package="rviz2",
+        executable="rviz2",
+        output="log",
+        arguments=[
+            "--display-config",
+            rviz_config,
+            "--ros-args",
+            "--log-level",
+            log_level,
+        ],
+        parameters=[
+            robot_description,
+            robot_description_semantic,
+            robot_description_kinematics,
+            planning_pipeline,
+            joint_limits,
+            {"use_sim_time": use_sim_time},
+        ],
+        condition=IfCondition(enable_rviz),
+    )
+
+    delayed_rviz = TimerAction(
+        period=5.0,          # delay in seconds
+        actions=[rviz_node]   # actions to execute after delay
+    )
+    nodes.append(delayed_rviz)
 
     return LaunchDescription(declared_arguments + nodes)
 
