@@ -1,6 +1,18 @@
 <?xml version="1.0" ?>
 <sdf version='1.5'>
   <model name="demo_cube">      
+
+      <plugin filename="libgz-sim-pose-publisher-system.so"
+              name="gz::sim::systems::PosePublisher">
+        <publish_model_pose>true</publish_model_pose>
+        <publish_link_pose>false</publish_link_pose>
+        <publish_canonical_link_pose>false</publish_canonical_link_pose>
+        <publish_nested_model_pose>true</publish_nested_model_pose>
+        <use_pose_vector_msg>false</use_pose_vector_msg>
+        <static_publisher>false</static_publisher>
+        <update_frequency>30</update_frequency>
+      </plugin>
+
       <static>0</static>
       <link name='link'>
         <inertial>
