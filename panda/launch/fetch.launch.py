@@ -162,6 +162,7 @@ def generate_launch_description() -> LaunchDescription:
                             "/camera@sensor_msgs/msg/Image@gz.msgs.Image",
                             "/camera_info@sensor_msgs/msg/CameraInfo@gz.msgs.CameraInfo",
                             "/model/cube/pose@geometry_msgs/msg/Pose@gz.msgs.Pose",
+                            "/model/fetch/pose@geometry_msgs/msg/Pose@gz.msgs.Pose",
                             "--ros-args",
                             "--log-level",
                             log_level,
