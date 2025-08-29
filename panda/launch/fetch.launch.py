@@ -150,7 +150,7 @@ def generate_launch_description() -> LaunchDescription:
                             "--log-level",
                             log_level,
                         ],
-                        parameters=[{"use_sim_time": use_sim_time}],
+                        parameters=[{"use_sim_time": use_sim_time, "x": -0.6}],
                     ),
                     # ros_gz_bridge (clock -> ROS 2)
                     Node(
@@ -161,6 +161,7 @@ def generate_launch_description() -> LaunchDescription:
                             "/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock",
                             "/camera@sensor_msgs/msg/Image@gz.msgs.Image",
                             "/camera_info@sensor_msgs/msg/CameraInfo@gz.msgs.CameraInfo",
+                            "/model/cube/pose@geometry_msgs/msg/Pose@gz.msgs.Pose",
                             "--ros-args",
                             "--log-level",
                             log_level,
