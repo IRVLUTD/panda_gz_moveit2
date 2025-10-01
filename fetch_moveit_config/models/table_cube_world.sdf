@@ -63,12 +63,12 @@
       <self_collide>false</self_collide>
     </model>
     <include>
-      <uri>file:///data/panda_gz_moveit2/fetch_moveit_config/models/cafe_table</uri>
+      <uri>model://fetch_moveit_config/models/cafe_table</uri>
       <name>cafe_table</name>
       <pose>0 0 0 0 0 0</pose>
     </include>
     <include>
-      <uri>file:///data/panda_gz_moveit2/fetch_moveit_config/models/demo_cube</uri>
+      <uri>model://fetch_moveit_config/models/demo_cube</uri>
       <name>cube</name>
       <pose>-0.20000000000000001 0.20000000000000001 0.80000000000000004 0 0 0</pose>
     </include>
