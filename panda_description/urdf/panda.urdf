@@ -557,7 +557,7 @@
   </ros2_control>
   <gazebo>
     <plugin filename="libgz_ros2_control-system.so" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
-      <parameters>/data/ros2_ws/install/share/panda_moveit_config/config/controllers_effort.yaml</parameters>
+      <parameters>/data/ros2_ws/install/panda_moveit_config/share/panda_moveit_config/config/controllers_effort.yaml</parameters>
     </plugin>
   </gazebo>
 </robot>
