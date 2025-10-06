@@ -17,7 +17,7 @@ install(PROGRAMS
     DESTINATION lib/${PROJECT_NAME}
 )
 
-install(DIRECTORY meshes robots config urdf
+install(DIRECTORY meshes robots fetch config urdf
   DESTINATION share/${PROJECT_NAME}
 )
 
