@@ -168,7 +168,7 @@ def generate_launch_description():
             # TODO: Re-enable `default_planner_request_adapters/AddRuckigTrajectorySmoothing` once its issues are resolved
             "request_adapters": ["default_planning_request_adapters/ResolveConstraintFrames",
                                   "default_planning_request_adapters/ValidateWorkspaceBounds",
-                                  #"default_planning_request_adapters/CheckStartStateBounds",
+                                  "default_planning_request_adapters/CheckStartStateBounds",
                                   "default_planning_request_adapters/CheckStartStateCollision"],
             # # TODO: Reduce start_state_max_bounds_error once spawning with specific joint configuration is enabled
             "response_adapters": ["default_planning_response_adapters/AddTimeOptimalParameterization",
@@ -307,10 +307,11 @@ def generate_launch_description():
     ]
 
     # Add nodes for loading controllers
+    nodes_controller = []
     for controller in moveit_controller_manager_yaml["controller_names"] + [
         "joint_state_broadcaster"
     ]:
-        nodes.append(
+        nodes_controller.append(
             # controller_manager_spawner
             Node(
                 package="controller_manager",
@@ -320,6 +321,12 @@ def generate_launch_description():
                 parameters=[{"use_sim_time": use_sim_time}],
             ),
         )
+
+    delayed_nodes = TimerAction(
+        period=10.0,          # delay in seconds
+        actions=nodes_controller   # actions to execute after delay
+    )
+    nodes.append(delayed_nodes)  
 
     # rviz2
     rviz_node = Node(
@@ -345,7 +352,7 @@ def generate_launch_description():
     )
 
     delayed_rviz = TimerAction(
-        period=5.0,          # delay in seconds
+        period=15.0,          # delay in seconds
         actions=[rviz_node]   # actions to execute after delay
     )
     nodes.append(delayed_rviz)
