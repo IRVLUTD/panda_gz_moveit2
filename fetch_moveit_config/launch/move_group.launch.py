@@ -323,7 +323,7 @@ def generate_launch_description():
         )
 
     delayed_nodes = TimerAction(
-        period=10.0,          # delay in seconds
+        period=15.0,          # delay in seconds
         actions=nodes_controller   # actions to execute after delay
     )
     nodes.append(delayed_nodes)  
@@ -352,7 +352,7 @@ def generate_launch_description():
     )
 
     delayed_rviz = TimerAction(
-        period=15.0,          # delay in seconds
+        period=20.0,          # delay in seconds
         actions=[rviz_node]   # actions to execute after delay
     )
     nodes.append(delayed_rviz)
