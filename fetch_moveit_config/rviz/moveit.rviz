@@ -7,6 +7,8 @@ Panels:
         - /Global Options1
         - /MotionPlanning1
         - /Image1
+        - /TF1
+        - /TF1/Frames1
       Splitter Ratio: 0.6278260946273804
     Tree Height: 140
   - Class: rviz_common/Selection
@@ -385,6 +387,117 @@ Visualization Manager:
         Reliability Policy: Reliable
         Value: /camera
       Value: true
+    - Class: rviz_default_plugins/TF
+      Enabled: true
+      Filter (blacklist): ""
+      Filter (whitelist): ""
+      Frame Timeout: 15
+      Frames:
+        All Enabled: false
+        RT_grasp:
+          Value: true
+        base_link:
+          Value: false
+        bellows_link:
+          Value: false
+        bellows_link2:
+          Value: false
+        elbow_flex_link:
+          Value: false
+        estop_link:
+          Value: false
+        forearm_roll_link:
+          Value: false
+        gripper_link:
+          Value: false
+        head_camera_depth_frame:
+          Value: false
+        head_camera_depth_optical_frame:
+          Value: false
+        head_camera_link:
+          Value: false
+        head_camera_rgb_frame:
+          Value: false
+        head_camera_rgb_optical_frame:
+          Value: false
+        head_pan_link:
+          Value: false
+        head_tilt_link:
+          Value: false
+        l_gripper_finger_link:
+          Value: false
+        l_wheel_link:
+          Value: false
+        laser_link:
+          Value: false
+        r_gripper_finger_link:
+          Value: false
+        r_wheel_link:
+          Value: false
+        shoulder_lift_link:
+          Value: false
+        shoulder_pan_link:
+          Value: false
+        torso_fixed_link:
+          Value: false
+        torso_lift_link:
+          Value: false
+        upperarm_roll_link:
+          Value: false
+        world:
+          Value: false
+        wrist_flex_link:
+          Value: false
+        wrist_roll_link:
+          Value: true
+      Marker Scale: 1
+      Name: TF
+      Show Arrows: false
+      Show Axes: true
+      Show Names: true
+      Tree:
+        world:
+          base_link:
+            RT_grasp:
+              {}
+            estop_link:
+              {}
+            l_wheel_link:
+              {}
+            laser_link:
+              {}
+            r_wheel_link:
+              {}
+            torso_fixed_link:
+              {}
+            torso_lift_link:
+              bellows_link:
+                {}
+              bellows_link2:
+                {}
+              head_pan_link:
+                head_tilt_link:
+                  head_camera_link:
+                    head_camera_depth_frame:
+                      head_camera_depth_optical_frame:
+                        {}
+                    head_camera_rgb_frame:
+                      head_camera_rgb_optical_frame:
+                        {}
+              shoulder_pan_link:
+                shoulder_lift_link:
+                  upperarm_roll_link:
+                    elbow_flex_link:
+                      forearm_roll_link:
+                        wrist_flex_link:
+                          wrist_roll_link:
+                            gripper_link:
+                              l_gripper_finger_link:
+                                {}
+                              r_gripper_finger_link:
+                                {}
+      Update Interval: 0
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -454,7 +567,7 @@ Visualization Manager:
 Window Geometry:
   Displays:
     collapsed: false
-  Height: 720
+  Height: 701
   Hide Left Dock: false
   Hide Right Dock: true
   Image:
@@ -463,7 +576,7 @@ Window Geometry:
     collapsed: false
   MotionPlanning - Trajectory Slider:
     collapsed: false
-  QMainWindow State: 000000ff00000000fd0000000400000000000002470000027afc020000000cfb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000003b000000c7000000c700fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb000000280020002d0020005400720061006a006500630074006f0072007900200053006c00690064006500720000000000ffffffff0000000000000000fb00000044004d006f00740069006f006e0050006c0061006e006e0069006e00670020002d0020005400720061006a006500630074006f0072007900200053006c00690064006500720000000000ffffffff0000001600000016fb0000000a0049006d00610067006501000001080000003e0000001600fffffffb0000001c004d006f00740069006f006e0050006c0061006e006e0069006e0067010000014c000001690000016900ffffff0000000100000110000003b0fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a005600690065007700730000000046000003b0000000a000fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b2000000000000000000000002000005000000003efc0100000001fb0000000a00560069006500770073030000004e00000080000002e100000197000000030000078000000048fc0100000002fb0000000800540069006d00650000000000000007800000025300fffffffb0000000800540069006d00650100000000000004500000000000000000000002b30000027a00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd00000004000000000000024700000267fc020000000cfb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000003b000000c7000000c700fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb000000280020002d0020005400720061006a006500630074006f0072007900200053006c00690064006500720000000000ffffffff0000000000000000fb00000044004d006f00740069006f006e0050006c0061006e006e0069006e00670020002d0020005400720061006a006500630074006f0072007900200053006c00690064006500720000000000ffffffff0000003f00fffffffb0000000a0049006d0061006700650100000108000000200000001600fffffffb0000001c004d006f00740069006f006e0050006c0061006e006e0069006e0067010000012e000001740000016900ffffff0000000100000110000003b0fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a005600690065007700730000000046000003b0000000a000fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b2000000000000000000000002000005000000003efc0100000001fb0000000a00560069006500770073030000004e00000080000002e100000197000000030000078000000048fc0100000002fb0000000800540069006d00650000000000000007800000025300fffffffb0000000800540069006d00650100000000000004500000000000000000000002b30000026700000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:
