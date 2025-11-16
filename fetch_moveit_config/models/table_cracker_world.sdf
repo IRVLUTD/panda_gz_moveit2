@@ -75,7 +75,7 @@
     <include>
       <uri>model://fetch_moveit_config/models/003_cracker_box</uri>
       <name>cracker_box</name>
-      <pose>-0.20000000000000001 -0.20000000000000001 0.78000000000000003 0 0 -0.78500000000000036</pose>
+      <pose>-0.20000000000000001 -0.20000000000000001 0.8200000000000003 0 0 -0.78500000000000036</pose>
     </include>
     <light name='sun' type='directional'>
       <pose>0 0 10 0 0 0</pose>

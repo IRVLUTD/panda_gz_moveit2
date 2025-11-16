@@ -1,19 +1,31 @@
 <?xml version="1.0" ?>
 <sdf version="1.4">
   <model name="003_cracker_box">
+
+      <plugin filename="libgz-sim-pose-publisher-system.so"
+              name="gz::sim::systems::PosePublisher">
+        <publish_model_pose>true</publish_model_pose>
+        <publish_link_pose>false</publish_link_pose>
+        <publish_canonical_link_pose>false</publish_canonical_link_pose>
+        <publish_nested_model_pose>true</publish_nested_model_pose>
+        <use_pose_vector_msg>false</use_pose_vector_msg>
+        <static_publisher>false</static_publisher>
+        <update_frequency>30</update_frequency>
+      </plugin>
+
     <static>false</static>
-    <inertial>
-      <mass>0.25</mass>
-      <inertia>
-        <ixx>0.001</ixx>
-        <ixy>0.000000</ixy>
-        <ixz>0.000000</ixz>
-        <iyy>0.001</iyy>
-        <iyz>0.000000</iyz>
-        <izz>0.001</izz>
-      </inertia>
-    </inertial>      
     <link name="link">
+      <inertial>
+        <mass>0.25</mass>
+        <inertia>
+          <ixx>0.5</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>0.5</iyy>
+          <iyz>0.000000</iyz>
+          <izz>0.5</izz>
+        </inertia>
+      </inertial>     
       <collision name="collision">
         <geometry>
           <mesh>
@@ -27,8 +39,18 @@
               <mu2>10.0</mu2>
             </ode>
           </friction>
+          <contact>
+            <ode>
+              <kp>100000</kp>
+              <kd>1.0</kd>
+            </ode>
+          </contact>          
         </surface>        
       </collision>
+      <velocity_decay>
+        <linear>0.1</linear>
+        <angular>0.1</angular>
+      </velocity_decay>      
       <visual name="visual">
         <geometry>
           <mesh>

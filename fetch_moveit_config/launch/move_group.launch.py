@@ -168,7 +168,7 @@ def generate_launch_description():
             # TODO: Re-enable `default_planner_request_adapters/AddRuckigTrajectorySmoothing` once its issues are resolved
             "request_adapters": ["default_planning_request_adapters/ResolveConstraintFrames",
                                   "default_planning_request_adapters/ValidateWorkspaceBounds",
-                                  "default_planning_request_adapters/CheckStartStateBounds",
+                                  #"default_planning_request_adapters/CheckStartStateBounds",
                                   "default_planning_request_adapters/CheckStartStateCollision"],
             # # TODO: Reduce start_state_max_bounds_error once spawning with specific joint configuration is enabled
             "response_adapters": ["default_planning_response_adapters/AddTimeOptimalParameterization",
